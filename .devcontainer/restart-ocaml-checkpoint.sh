@@ -9,7 +9,7 @@ RESTART_SCRIPT="$1"
 MESSSAGE_STRING="$2"
 
 # Build the banner string.
-DATE_CREATED="$(stat --format="%w" /home/vscode/checkpoints/hol-light-core)"
+DATE_CREATED="$(stat --format="%w" ${RESTART_SCRIPT})"
 START_BANNER="HOL Light checkpoint of ${DATE_CREATED}"
 PROMPT_STRING="\n# "
 BANNER_STRING="\n    ${START_BANNER}\n    ${MESSSAGE_STRING}\n${PROMPT_STRING}"
