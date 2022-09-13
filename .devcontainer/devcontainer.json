@@ -1,0 +1,52 @@
+// Marco Maggesi - University of Florence
+// See https://code.visualstudio.com/docs/remote/create-dev-container#_create-a-devcontainerjson-file
+// Inspired from https://github.com/microsoft/vscode-dev-containers/blob/main/containers/
+
+{
+	"name": "HOL Light",
+	"build": {
+		"dockerfile": "Dockerfile",
+		// Update 'VARIANT' to pick an Debian / Ubuntu OS version: debian-11, debian-10, debian-9, ubuntu-21.04, ubuntu-20.04, ubuntu-18.04
+		// Use Debian 11, Debian 9, Ubuntu 18.04 or Ubuntu 21.04 on local arm64/Apple Silicon
+		"args": {
+			"VARIANT": "debian-11"
+			// "HOLLIGHT_DIR": "${containerEnv:HOLLIGHT_DIR}"
+		}
+	},
+
+	// Environment variables
+	// https://code.visualstudio.com/remote/advancedcontainers/environment-variables#_option-1-add-individual-variables
+	// Variables that apply to the entire container
+	"containerEnv": {
+		// "MY_CONTAINER_VAR": "some-value-here",
+		// "MY_CONTAINER_VAR2": "${localEnv:SOME_LOCAL_VAR}"
+		"HOLLIGHT_DIR": "/home/vscode/hol-light"
+		"DMTCP_CHECKPOINT_DIR": "/home/vscode/checkpoints"
+	},
+	// Variables for VS Code and related sub-processes
+	"remoteEnv": {
+		// "PATH": "${containerEnv:PATH}:/some/other/path",
+		// "MY_REMOTE_VARIABLE": "some-other-value-here",
+		// "MY_REMOTE_VARIABLE2": "${localEnv:SOME_LOCAL_VAR}"
+	},
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"extensions": [
+				"ocamllabs.ocaml-platform"
+			]
+		}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}

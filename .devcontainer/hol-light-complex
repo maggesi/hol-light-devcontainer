@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -e -u
+
+RESTART_SCRIPT="/home/vscode/checkpoints/hol-light-complex"
+MESSAGE_STRING="Preloaded with multivariate-based complex analysis."
+
+exec restart-ocaml-checkpoint.sh "${RESTART_SCRIPT}" "${MESSAGE_STRING}"
