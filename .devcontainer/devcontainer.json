@@ -20,7 +20,7 @@
 	"containerEnv": {
 		// "MY_CONTAINER_VAR": "some-value-here",
 		// "MY_CONTAINER_VAR2": "${localEnv:SOME_LOCAL_VAR}"
-		"HOLLIGHT_DIR": "/home/vscode/hol-light"
+		"HOLLIGHT_DIR": "/home/vscode/hol-light",
 		"DMTCP_CHECKPOINT_DIR": "/home/vscode/checkpoints"
 	},
 	// Variables for VS Code and related sub-processes
