@@ -36,8 +36,11 @@
 		"vscode": {
 			// Set *default* container specific settings.json values on container create.
 			"extensions": [
-				"ocamllabs.ocaml-platform"
-			]
+				"ocamllabs.ocaml-platform",
+				"ryuta46.multi-command"
+			],
+         "editor.autoIndent": "none"
+        //  "terminal.integrated.defaultLocation": "editor"
 		}
 	},
 
