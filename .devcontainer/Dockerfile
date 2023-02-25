@@ -67,8 +67,9 @@ RUN mkdir -p "${HOLLIGHT_DIR}" \
  && make
 
 COPY --chown=vscode start.ml "${HOLLIGHT_DIR}/start.ml"
-COPY --chown=vscode --chmod=0755 hol-light "${HOME}/.local/bin/hol-light"
+COPY --chown=vscode --chmod=0755 load-hol-light "${HOME}/.local/bin/load-hol-light"
 COPY --chown=vscode --chmod=0755 restart-ocaml-checkpoint.sh "${HOME}/.local/bin/restart-ocaml-checkpoint.sh"
+COPY --chown=vscode --chmod=0755 hol-light "${HOME}/.local/bin/hol-light"
 COPY --chown=vscode --chmod=0755 hol-light-core "${HOME}/.local/bin/hol-light-core"
 COPY --chown=vscode --chmod=0755 hol-light-card "${HOME}/.local/bin/hol-light-card"
 COPY --chown=vscode --chmod=0755 hol-light-multivariate "${HOME}/.local/bin/hol-light-multivariate"

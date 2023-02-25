@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -e -u
+
+CAMLP5_DIR="$(camlp5 -where)"
+START_FILE="${HOLLIGHT_DIR}/start.ml"
+
+exec ocaml -I "${CAMLP5_DIR}" -I "${HOLLIGHT_DIR}" -init "${START_FILE}"

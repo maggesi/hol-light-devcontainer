@@ -2,7 +2,7 @@
 
 set -e -u
 
-CAMLP5_DIR="$(camlp5 -where)"
-START_FILE="${HOLLIGHT_DIR}/start.ml"
+RESTART_SCRIPT="/home/vscode/checkpoints/dmtcp_restart_script.sh"
+MESSAGE_STRING="Restart OCaml with HOL preloaded."
 
-exec ocaml -I "${CAMLP5_DIR}" -I "${HOLLIGHT_DIR}" -init "${START_FILE}"
+exec restart-ocaml-checkpoint.sh "${RESTART_SCRIPT}" "${MESSAGE_STRING}"
