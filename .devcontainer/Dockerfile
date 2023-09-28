@@ -51,29 +51,14 @@ RUN mkdir -p ${BUILD_DIR}/dmtcp \
 # Install HOL Light
 # -----------------------------------------------------------------------------
 
-# Version 2022-08-01
-# ARG HOL_LIGHT_VERSION=8822aa45052e2ec5f9608e79aa3ec7bc84abedf8
-# Version 2023-04-15
-# ARG HOL_LIGHT_VERSION=6835b3102333bd6743b9714a39c7e169228eaaca
-# Version 2023-04-27
-ARG HOL_LIGHT_VERSION=104a513e474787e6f1408a39e3fabdb83637ed96
+# Version 2023-09-15
+ARG HOL_LIGHT_VERSION=9c07c4f5a7b046e01a355e7612c5fe7582f4da91
 ARG HOL_LIGHT_ARCHIVE=https://github.com/jrh13/hol-light/archive/${HOL_LIGHT_VERSION}.tar.gz
 ARG HOLLIGHT_DIR=${HOME}/hol-light
 
-# RUN mkdir -p "${HOLLIGHT_DIR}" \
-#  && cd "${HOLLIGHT_DIR}" \
-#  && curl -sL "${HOL_LIGHT_ARCHIVE}" | tar xz --strip-components=1 \
-#  && eval $(opam env) \
-#  && make
-
-RUN cd "${HOME}" \
- && git config --global user.email "you@example.com" \
- && git config --global user.name "Your Name" \
- && git clone https://github.com/jrh13/hol-light.git \
+RUN mkdir -p "${HOLLIGHT_DIR}" \
  && cd "${HOLLIGHT_DIR}" \
- && git remote add aqjune https://github.com/aqjune/hol-light.git \
- && git fetch aqjune \
- && git merge -m "ocaml4.14" aqjune/ocaml4.14 \
+ && curl -sL "${HOL_LIGHT_ARCHIVE}" | tar xz --strip-components=1 \
  && eval $(opam env) \
  && make
 
