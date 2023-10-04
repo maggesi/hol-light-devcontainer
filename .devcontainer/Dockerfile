@@ -55,8 +55,8 @@ RUN mkdir -p ${BUILD_DIR}/dmtcp \
 # Install HOL Light
 # -----------------------------------------------------------------------------
 
-# Version 2022-08-01
-ARG HOL_LIGHT_VERSION=8822aa45052e2ec5f9608e79aa3ec7bc84abedf8
+# Version 2022-09-15
+ARG HOL_LIGHT_VERSION=9c07c4f5a7b046e01a355e7612c5fe7582f4da91
 ARG HOL_LIGHT_ARCHIVE=https://github.com/jrh13/hol-light/archive/${HOL_LIGHT_VERSION}.tar.gz
 ARG HOLLIGHT_DIR=${HOME}/hol-light
 
