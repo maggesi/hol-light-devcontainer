@@ -1,3 +1,4 @@
 .DS_Store
-ckpt_ocamlrun_*.dmtcp
-dmtcp_restart*.sh
+
+# Directory hosting HOL projects versioned separately
+code
