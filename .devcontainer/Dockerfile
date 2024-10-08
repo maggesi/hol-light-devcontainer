@@ -2,39 +2,88 @@
 # Starting configuration
 # -----------------------------------------------------------------------------
 
-ARG VARIANT=debian-11
-FROM mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
+# Warning: This is overwritten in devcontainer.json.
+ARG VARIANT=1.0.15-debian-12
 
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
- && apt-get -y install --no-install-recommends \
-      build-essential git curl make m4 \
-      # Needed for camlp5 8.xx :
-      pkg-config libpcre3-dev \
-      rlwrap screen tmux opam
+FROM mcr.microsoft.com/devcontainers/base:${VARIANT}
+
+# Serve?
+COPY --chown=vscode wsl.conf "/etc/wsl.conf"
+
+# -----------------------------------------------------------------------------
+# Install OCaml and the basic tools.
+# -----------------------------------------------------------------------------
+
+RUN apt update \
+ && apt -y install --no-install-recommends \
+      git curl m4 xdot libgmp-dev pkg-config opam
+      # git curl ocaml-core camlp5 libnum-ocaml-dev ledit
 
 USER vscode
 
+RUN opam init -a --bare --disable-sandboxing \
+ && opam update
+
 # -----------------------------------------------------------------------------
-# Install Opam, OCaml and the necessary tools.
+# Install HOL Light
 # -----------------------------------------------------------------------------
 
-# RUN opam init -a --disable-sandboxing -c ocaml-base-compiler.4.05.0
-RUN opam init -a --disable-sandboxing -c ocaml-base-compiler.4.14.1 \
- && eval $(opam env) \
- && opam pin add -y camlp5 8.00.05 \
- && opam install -y num camlp5 merlin \
- && opam clean
+# Version 2022-09-15
+# ARG HOL_LIGHT_VERSION=9c07c4f5a7b046e01a355e7612c5fe7582f4da91
+# Version 2024-08-08
+# ARG HOL_LIGHT_VERSION=016d22698294583153a0d9ff625d0b0cf44ee9d1
+# Version 2024-08-08
+# ARG HOL_LIGHT_VERSION=016d22698294583153a0d9ff625d0b0cf44ee9d1
+
+# Version 2024-08-08
+ARG HOL_LIGHT_VERSION=282fc370a33c3e5900dd2789bd53dd2a3bf138ad
+ARG HOME=/home/vscode
+ARG HOL_LIGHT_ARCHIVE="https://github.com/jrh13/hol-light/archive/${HOL_LIGHT_VERSION}.tar.gz"
+
+# Warning: This is overwritten in devcontainer.json.
+ARG HOLLIGHT_DIR="${HOME}/hol-light"
+
+RUN mkdir -p "${HOLLIGHT_DIR}" \
+ && cd "${HOLLIGHT_DIR}" \
+ && curl -sL "${HOL_LIGHT_ARCHIVE}" | tar xz --strip-components=1
+
+RUN cd "${HOLLIGHT_DIR}" \
+ && make switch
+
+RUN cd "${HOLLIGHT_DIR}" \
+ && eval $(opam env) ; make
+
+# -----------------------------------------------------------------------------
+# Install selfie for checkpointing.
+# -----------------------------------------------------------------------------
+
+RUN cd "${HOLLIGHT_DIR}" \
+ && git clone git://c9x.me/selfie.git \
+ && cd selfie \
+ && eval $(opam env) ; make \
+ && make selfie.cma \
+ && cp -a dllcaml_selfie.so selfie.cma selfie.ml ../ \
+ && rm -rf "${HOLLIGHT_DIR}/selfie"
+
+# # ARG HOL_SH="${HOLLIGHT_DIR}/hol.sh"
+# # RUN cd "${HOLLIGHT_DIR}" \
+# #  && ( echo 'loadt "update_database.ml";;'; \
+# #       echo '#load "selfie.cma";;'; \
+# #       echo '#use "selfie.ml";;'; \
+# #       echo 'snap "hol-light.base.img";;' \
+# #     ) | $HOL_SH
 
 # -----------------------------------------------------------------------------
 # Install DMTCP
 # -----------------------------------------------------------------------------
 
-ARG HOME=/home/vscode
-ARG BUILD_DIR=${HOME}/src
 # Version 2022-03-01
 # ARG DMTCP_VERSION=133687764c6742906006a1d247e3b83cd860fa1d
-# Version 2022-11-10
-ARG DMTCP_VERSION=b0a1ebbadc71e720f4ed476c312cf5b47bab1cef
+# Version 2024-08-13
+ARG DMTCP_VERSION=fdca80f5f71bf4d3f88bfdc4bff0e5e9716754bb
+ARG BUILD_DIR=${HOME}/src
+
+# Warning: This is overwritten in devcontainer.json.
 ARG DMTCP_CHECKPOINT_DIR=${HOME}/checkpoints
 
 RUN mkdir -p ${BUILD_DIR}/dmtcp \
@@ -48,19 +97,27 @@ RUN mkdir -p ${BUILD_DIR}/dmtcp \
  && mkdir -p ${DMTCP_CHECKPOINT_DIR}
 
 # -----------------------------------------------------------------------------
-# Install HOL Light
+# Install additional software: CSDP, Minisat, Cadical.
 # -----------------------------------------------------------------------------
 
-# Version 2023-09-15
-ARG HOL_LIGHT_VERSION=9c07c4f5a7b046e01a355e7612c5fe7582f4da91
-ARG HOL_LIGHT_ARCHIVE=https://github.com/jrh13/hol-light/archive/${HOL_LIGHT_VERSION}.tar.gz
-ARG HOLLIGHT_DIR=${HOME}/hol-light
+USER root
 
-RUN mkdir -p "${HOLLIGHT_DIR}" \
- && cd "${HOLLIGHT_DIR}" \
- && curl -sL "${HOL_LIGHT_ARCHIVE}" | tar xz --strip-components=1 \
- && eval $(opam env) \
- && make
+RUN apt -y install --no-install-recommends \
+  coinor-csdp \
+  cadical \
+  minisat
+
+USER vscode
+
+# RUN git clone https://github.com/coin-or/Csdp.git &&
+#     cd Csdp &&
+#     apt -y install gfortan libblas-dev liblapack-dev
+#     apt -y install ncbi-blast+ &&
+#     make
+
+# -----------------------------------------------------------------------------
+# Copy scripts and other files.
+# -----------------------------------------------------------------------------
 
 COPY --chown=vscode start.ml "${HOLLIGHT_DIR}/start.ml"
 COPY --chown=vscode --chmod=0755 load-hol-light "${HOME}/.local/bin/load-hol-light"

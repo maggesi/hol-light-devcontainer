@@ -6,10 +6,9 @@
 	"name": "HOL Light",
 	"build": {
 		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick an Debian / Ubuntu OS version: debian-11, debian-10, debian-9, ubuntu-21.04, ubuntu-20.04, ubuntu-18.04
-		// Use Debian 11, Debian 9, Ubuntu 18.04 or Ubuntu 21.04 on local arm64/Apple Silicon
+		// Update 'VARIANT' to pick an Debian / Ubuntu OS version.  E.g.: debian-12
 		"args": {
-			"VARIANT": "debian-11"
+			// "VARIANT": "1.0.15-debian-12"
 			// "HOLLIGHT_DIR": "${containerEnv:HOLLIGHT_DIR}"
 		}
 	},
@@ -36,11 +35,28 @@
 		"vscode": {
 			// Set *default* container specific settings.json values on container create.
 			"extensions": [
+<<<<<<< HEAD
 				"ocamllabs.ocaml-platform",
 				"ryuta46.multi-command"
 			],
          "editor.autoIndent": "none"
         //  "terminal.integrated.defaultLocation": "editor"
+=======
+				// "ocamllabs.ocaml-platform",
+				"monadius.hol-light-simple"
+			],
+			"files.associations": {
+			    "*.hl": "hol-light-ocaml",
+			    "*.ml": "hol-light-ocaml"
+			},
+			"hol-light.path": "/workspaces/hol-light-devcontainer/hol-light",
+			"hol-light.exePaths": [
+			    "/home/vscode/checkpoints/hol-light-core",
+			    "/home/vscode/checkpoints/hol-light-card",
+			    "/home/vscode/checkpoints/hol-light-multivariate",
+			    "/home/vscode/checkpoints/hol-light-complex"
+			]
+>>>>>>> cleanup
 		}
 	},
 
@@ -50,6 +66,7 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
 
-	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// Uncomment to connect as a non-root user.
+    // See https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
 }
