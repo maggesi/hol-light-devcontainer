@@ -35,13 +35,6 @@
 		"vscode": {
 			// Set *default* container specific settings.json values on container create.
 			"extensions": [
-<<<<<<< HEAD
-				"ocamllabs.ocaml-platform",
-				"ryuta46.multi-command"
-			],
-         "editor.autoIndent": "none"
-        //  "terminal.integrated.defaultLocation": "editor"
-=======
 				// "ocamllabs.ocaml-platform",
 				"monadius.hol-light-simple"
 			],
@@ -56,7 +49,6 @@
 			    "/home/vscode/checkpoints/hol-light-multivariate",
 			    "/home/vscode/checkpoints/hol-light-complex"
 			]
->>>>>>> cleanup
 		}
 	},
 
