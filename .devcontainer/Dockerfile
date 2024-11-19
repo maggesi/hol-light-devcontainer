@@ -28,15 +28,13 @@ RUN opam init -a --bare --disable-sandboxing \
 # Install HOL Light
 # -----------------------------------------------------------------------------
 
-# Version 2022-09-15
-# ARG HOL_LIGHT_VERSION=9c07c4f5a7b046e01a355e7612c5fe7582f4da91
 # Version 2024-08-08
-# ARG HOL_LIGHT_VERSION=016d22698294583153a0d9ff625d0b0cf44ee9d1
-# Version 2024-08-08
-# ARG HOL_LIGHT_VERSION=016d22698294583153a0d9ff625d0b0cf44ee9d1
+# ARG HOL_LIGHT_VERSION=282fc370a33c3e5900dd2789bd53dd2a3bf138ad
+# Version 2024-10-10
+ARG HOL_LIGHT_VERSION=6f137d97e56c440ac7818c2d8b885df1cbaf10cf
+# Version 2024-10-17
+ARG HOL_LIGHT_VERSION=32aac5994198d90ca682ab92e3763c887cf24fa7
 
-# Version 2024-08-08
-ARG HOL_LIGHT_VERSION=282fc370a33c3e5900dd2789bd53dd2a3bf138ad
 ARG HOME=/home/vscode
 ARG HOL_LIGHT_ARCHIVE="https://github.com/jrh13/hol-light/archive/${HOL_LIGHT_VERSION}.tar.gz"
 
