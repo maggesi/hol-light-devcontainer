@@ -9,7 +9,7 @@
 		// Update 'VARIANT' to pick an Debian / Ubuntu OS version.  E.g.: debian-12
 		"args": {
 			// "VARIANT": "1.0.15-debian-12"
-			// "HOLLIGHT_DIR": "${containerEnv:HOLLIGHT_DIR}"
+			// "VARIANT": "1.0-debian-12"
 		}
 	},
 
@@ -19,8 +19,6 @@
 	"containerEnv": {
 		// "MY_CONTAINER_VAR": "some-value-here",
 		// "MY_CONTAINER_VAR2": "${localEnv:SOME_LOCAL_VAR}"
-		"HOLLIGHT_DIR": "/home/vscode/hol-light",
-		"DMTCP_CHECKPOINT_DIR": "/home/vscode/checkpoints"
 	},
 	// Variables for VS Code and related sub-processes
 	"remoteEnv": {

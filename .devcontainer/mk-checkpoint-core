@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd "${HOL_LIGHT_DIR}"
+exec ./make-checkpoint.sh ~/.local/bin/hol-light-core
