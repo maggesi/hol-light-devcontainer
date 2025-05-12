@@ -1,4 +1,5 @@
 #!/bin/sh
 
+HOL_LIGHT_DIR='/workspaces/hol-light-devcontainer/hol-light'
 cd "${HOL_LIGHT_DIR}"
-exec ./make-checkpoint.sh ~/.local/bin/hol-light-core
+exec ./make-checkpoint.sh ~/.local/bin/hol-light-core "loadt \"/workspaces/hol-light-devcontainer/.devcontainer/more.ml\""
