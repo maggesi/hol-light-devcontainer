@@ -1,4 +1,4 @@
-unset_verbose_symbols();;
+(* unset_verbose_symbols();; *)
 
 loadt "update_database.ml";;
 
