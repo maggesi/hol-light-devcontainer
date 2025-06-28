@@ -28,17 +28,13 @@ RUN sudo apt update \
 # Install HOL Light
 # -----------------------------------------------------------------------------
 
-# Version 2025-04-12
-ARG HOL_LIGHT_VERSION=a807444b0041dcc429ade7994149b4ee89f55481
+# Version 2025-06-07
+ARG HOL_LIGHT_VERSION=0b58b1aec25e9929118e353e13eaaf606b86df7b
 ARG HOLLIGHT_DIR="${HOME}/hol-light"
 
 RUN git clone https://github.com/jrh13/hol-light.git \
  && cd hol-light \
  && git checkout "${HOL_LIGHT_VERSION}" \
- # Patch with scripts for checkpointing.  Needs to configure git first.
- && git config --global user.email "marco.maggesi@gmail.com" \
- && git config --global user.name  "Marco Maggesi" \
- && git pull --rebase https://github.com/aqjune-aws/hol-light.git ckpt2 \
  # Packages m4, xdot required by camlp5.
  && sudo apt -y install --no-install-recommends m4 xdot \
  # Install switch for OCaml 5.x
