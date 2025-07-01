@@ -30,6 +30,8 @@ RUN sudo apt update \
 
 # Version 2025-06-07
 ARG HOL_LIGHT_VERSION=0b58b1aec25e9929118e353e13eaaf606b86df7b
+# Version 2025-06-19
+ARG HOL_LIGHT_VERSION=37af947830f04a0dbd68b141b8148b63ae7c313c
 ARG HOLLIGHT_DIR="${HOME}/hol-light"
 
 RUN git clone https://github.com/jrh13/hol-light.git \
