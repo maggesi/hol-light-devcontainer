@@ -64,13 +64,3 @@ prioritize_vector ();;
 prioritize_int ();;
 prioritize_real ();;
 prioritize_num ();;
-
-needs "/workspaces/hol-light-devcontainer/.devcontainer/more.ml";;
-
-loadt "update_database.ml";;
-
-(* ------------------------------------------------------------------------- *)
-(* Garbage collection.                                                       *)
-(* ------------------------------------------------------------------------- *)
-
-Gc.compact();;

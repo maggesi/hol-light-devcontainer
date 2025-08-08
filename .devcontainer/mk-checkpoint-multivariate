@@ -1,6 +1,0 @@
-#!/bin/sh
-
-rm -rf /home/vscode/.local/bin/hol-light-multivariate.ckpt /home/vscode/.local/bin/hol-light-multivariate
-HOL_LIGHT_DIR='/workspaces/hol-light-devcontainer/hol-light'
-cd "${HOL_LIGHT_DIR}"
-exec ./make-checkpoint.sh ~/.local/bin/hol-light-multivariate "loadt \"/workspaces/hol-light-devcontainer/.devcontainer/mk_multivariate.ml\""
